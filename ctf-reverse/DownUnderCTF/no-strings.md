@@ -1,4 +1,4 @@
-1. use `file` command to see the file, it's a ELF file.
+1. use `file <file>` command to see the file, it's a ELF file.
 2. use `xxd <file>` to take a look and fortunatly we find the flag.
 
 ```
