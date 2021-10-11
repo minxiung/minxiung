@@ -1,3 +1,5 @@
+## way1
+
 1. use `file <file>` command to see the file, it's a ELF file.
 2. use `xxd <file> | grep easy` to take a look and fortunatly we find the flag.
 
@@ -9,3 +11,14 @@
 ```
 
 flag:easyctf{eb04fadf}
+
+==============================================
+
+## way2
+1. use `file <file>` command to see the file, it's a ELF file.
+2. use `strings <file> | grep easy` and we find the flag.
+
+```
+$ strings hexedit | grep easy        
+easyctf{eb04fadf}
+```
