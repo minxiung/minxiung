@@ -45,3 +45,5 @@ print(reverse_string)
 $ python3 strings.py
 MyFirstCTF{C0mpi1e_aSm_4nd_RuN!}
 ```
+
+flag: MyFirstCTF{C0mpi1e_aSm_4nd_RuN!}
