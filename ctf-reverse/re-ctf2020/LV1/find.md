@@ -231,7 +231,7 @@ MyFirstCTF{{{}}}{}}}}{}{}}}}}{}}}
 MyFirstCTF{{{}{}}{}}
 MyFirstCTF{{}}}}{{{}}}{}{}{{}{{}
 MyFirstCTF{{{}{{}}{{{}{}{}
-::MyFirstCTF{Y0U_gOt_th3_flag_bY_sTr1ngS}::
+MyFirstCTF{Y0U_gOt_th3_flag_bY_sTr1ngS}
 MyFirstCTF{{}}
 MyFirstCTF{{}{}{}{{{{{}{}}}}{}{}}}}}
 MyFirstCTF{{{{{}{{{{}
