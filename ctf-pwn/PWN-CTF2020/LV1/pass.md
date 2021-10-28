@@ -13,12 +13,12 @@ for GNU/Linux 3.2.0, not stripped
   b. `VV` to see the function(we just set) flow in a graphic way.
   
 3. by r2 VV command, we can see that var_20h is put at rbp-0x20, var_4h is at rbp-0x4.
-![image](https://user-images.githubusercontent.com/66505819/139224311-e1ab5a5e-23a2-4168-aa89-b9854b8be027.png)
+![image](https://user-images.githubusercontent.com/66505819/139246455-3a32ff1c-f05b-4d58-b7a5-2976cc7d66b0.png)
 
 4. keep looking, we find that the program store number 1234(0x4d2) at var_4h. And the program will compare it with 0xdeadbeef.
    if they are the same, program jump to Door open and we'll find the flag, or we fail.
-![image](https://user-images.githubusercontent.com/66505819/139225275-173b9989-6754-49a8-8c9c-fe62f5c8a85e.png)
-![image](https://user-images.githubusercontent.com/66505819/139225335-ac1f25a6-8fb3-4176-8976-4e69ccb910a9.png)
+![image](https://user-images.githubusercontent.com/66505819/139246670-c5619595-d225-4ea8-89e0-e1752fe65339.png)
+![image](https://user-images.githubusercontent.com/66505819/139246794-227723d7-fe4c-4f59-92e5-b6c59ef32075.png)
 
 5. Our input will be put at var_20h, and we need to change the data that store at var_4h, using boffer overflow. So, we have the script below.
 ```
