@@ -46,6 +46,7 @@ $ r2 ret2sc
 ```
 
 4. `s main`, `VV`. We saw there are two input, one is "name", another is "try your best:". the first will be put at **0x601080**, second will be put at **var_20h(rbp-0x20)**.
+
 ![Image](https://i.imgur.com/kkBkEOG.png)
 
 5. by the result above, we need to find the place that we can inject our shellcode, use gdb-peda.
