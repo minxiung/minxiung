@@ -21,9 +21,9 @@ BuildID[sha1]=63cc39d0f4f93acc2ee50813f4f82c8ed43d9135, not stripped
 
 ![Image](https://i.imgur.com/RISfNKD.png)
 
-1. we notice that this program will print flag which we want to get. So, what we need to do is to let the program jump here to run this function.
+6. we notice that this program will print flag which we want to get. So, what we need to do is to let the program jump here to run this function.
 
-2. count to overwrite the stack and rbp address until the return address. we need to BOF all of them, put the Billyhouse function address to the return address. Bellow is our exploit script.
+7. count to overwrite the stack and rbp address until the return address. we need to BOF all of them, put the Billyhouse function address to the return address. Bellow is our exploit script.
 
 ```python
 from pwn import *
