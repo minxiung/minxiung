@@ -172,7 +172,14 @@ Structured Exception Handling, 結構化例外狀況處理。
 Microsoft擴展了C語言的語法，用 try-except與try-finally語句來處理異常。[1]異常處理程序可以釋放已經獲取的資源、顯示出錯信息與程序內部狀態供調試、從錯誤中恢復、嘗試重新執行出錯的代碼或者關閉程序等等。
 
 一個__try語句不能既有__except，又有__finally。但try-except與try-finally語句可以嵌套使用。
- 
+
+SEH stack frame:
+![Image](https://i.imgur.com/tMuXGKi.png)
+
+
+### SafeSEH
+
+
     
 
 
