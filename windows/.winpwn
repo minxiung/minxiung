@@ -1,0 +1,30 @@
+{
+    "debugger":{
+        "i386": {
+            "x64dbg": "C:\Program Files (x86)\x64debug\release\x32\x32dbg.exe", 
+            "gdb": "", 
+            "windbg": "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Windows Kits\Debugging Tools for Windows (X86)\windbg.exe",
+            "windbgx": "C:\Users\USER\AppData\Local\Microsoft\WindowsApps\Microsoft.WinDbg_8wekyb3d8bbwe\WinDbgX.exe"
+        },
+        "amd64": {
+            "x64dbg": "C:\Program Files (x86)\x64debug\release\x64\x64dbg.exe", 
+            "gdb": "", 
+            "windbg": "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Windows Kits\Debugging Tools for Windows (X64)\windbg.exe",
+            "windbgx": "C:\Users\USER\AppData\Local\Microsoft\WindowsApps\Microsoft.WinDbg_8wekyb3d8bbwe\WinDbgX.exe"
+        }
+    },
+    "debugger_init": {
+        "i386": {
+            "x64dbg": "", 
+            "gdb": "", 
+            "windbg": ".load C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Windows Kits\Debugging Tools for Windows (X86)\x86\pykd.dll;!py -g E:\\ShareDir\\building\\bywin\\byinit.py;",
+            "windbgx": ".load C:\Users\USER\AppData\Local\Microsoft\WindowsApps\Microsoft.WinDbg_8wekyb3d8bbwe\x86\pykd.dll;!py -g E:\\ShareDir\\building\\bywin\\byinit.py;"
+        },
+        "amd64": {
+            "x64dbg": "", 
+            "gdb": "", 
+            "windbg": ".load C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Windows Kits\Debugging Tools for Windows (X64)\x64\pykd.dll;!py -g E:\\ShareDir\\building\\bywin\\byinit.py;",
+            "windbgx": ".load C:\Users\USER\AppData\Local\Microsoft\WindowsApps\Microsoft.WinDbg_8wekyb3d8bbwe\x64\pykd.dll;!py -g E:\\ShareDir\\building\\bywin\\byinit.py;"
+        }
+    }
+}
