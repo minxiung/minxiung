@@ -180,6 +180,9 @@ SEH stack frame:
 ### SafeSEH
 
 
+
+#### IL
+IL可以指Intermediate Language，同MSIL(Microsoft Intermediate Language),是将.NET代码转化为机器语言的一个中间语言的缩写。
     
 
 
