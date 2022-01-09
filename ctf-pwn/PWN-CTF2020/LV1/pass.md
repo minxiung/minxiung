@@ -48,3 +48,4 @@ hello hacker!
 [*] Got EOF while reading in interactive
 $
 ```
+the flag is: FLAG{xtnntfhzflpttvxvzzbfjfnxbjvrzxdfvzlvhpt}
