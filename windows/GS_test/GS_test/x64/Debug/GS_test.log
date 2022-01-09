@@ -1,3 +1,0 @@
-﻿cl : 命令列 warning D9025: 覆寫 '/sdl'，以 '/GS-'
-  GS_test.cpp
-  GS_test.vcxproj -> C:\Users\USER\study-note\windows\GS_test\x64\Debug\GS_test.exe
