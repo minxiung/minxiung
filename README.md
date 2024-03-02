@@ -1,5 +1,5 @@
 - 👋 Hi, I’m @minxiung
-- 👀 I’m a student studing cybersecurity in NTHU.
+- 👀 I’m a malware analyst.
 
 
 <!---
